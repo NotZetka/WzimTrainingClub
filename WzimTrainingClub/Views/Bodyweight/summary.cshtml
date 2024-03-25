@@ -1,0 +1,260 @@
+﻿@model WzimTrainingClub.ViewModels.BodyweightSummaryViewModel
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="~/js/Bodyweight/summary.js"></script>
+}
+
+@{
+    ViewData["Title"] = "Waga";
+
+    string FormatWeight(double D)
+    {
+        if (D == -0)
+            D = 0;
+
+        var x = $"{Math.Round(D, 2).ToString("+0.00;-0.00")}kg";
+        return x;
+    }
+
+
+}
+
+<div>
+    <h2 class="d-inline">Moja waga</h2>
+    <a asp-controller="Bodyweight" asp-action="EditRecords" class="font-weight-bold d-inline">+Dodaj wagi</a>
+</div>
+
+@if (Model.MostRecentRecord == null || Model.MostRecentRecord.Date != DateTime.Today)
+{
+    <div class="row">
+        <div class="col-3">
+            <div class="alert alert-info mt-3 mb-2">
+                <h5 class="ml-3">Add Today's Weight</h5>
+
+                <form asp-action="AddTodayWeight" method="post" class="ml-3 mr-3">
+                    <div class="input-group form-inline ">
+                        <input type="number" min="0" max="200" name="Weight" step="0.1" class="form-control mr-1" required />
+                        <input type="submit" value="Zapisz" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="row my-3">
+    <div class="col">
+        <div class="card mheight-100">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Ostatnia waga</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @(Model.MostRecentRecord == null ? "0" : Model.MostRecentRecord.Weight.ToString("F2"))kg
+                    </h4>
+                    <div class="card-text text-center">
+                        @if (Model.MostRecentRecord != null)
+                            @(Model.MostRecentRecord.Date.ToString("d"))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col">
+        <div class="card mb-2">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Tygodniowy postęp</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.CurrentWeekProgress)
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Dzienna srednia (w tym tygodniu)</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.CurrentWeekAverage)
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card mb-2">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Miesięczny postęp</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.CurrentMonthProgress)
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Dzienna średnia (w tym miesiącu)</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.CurrentMonthAverage)
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card mb-2">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Ogólny postęp</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.AllTimeProgress)
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Tygodniowa średnia (wszechczasów)</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.AllTimeAverage)
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <div class="card mheight-100">
+            <div class="card-header py-3">
+
+                <h5 class="card-subtitle d-">Docelowa waga <i class="far fa-edit float-right" style="cursor:pointer" data-toggle="modal" data-target="#TargetModal">Edytuj</i></h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center" id="TargetWeight" data-target="@(Model.Target == null ? 0 : Model.Target.TargetWeight)">
+                        @(Model.Target == null ? "0" : Model.Target.TargetWeight.ToString("F2"))kg
+                    </h4>
+                    <div class="card-text text-center">@(Model.Target.TargetDate.ToString("d"))</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mheight-100">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Odleglośc od docelowej wagi</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.DistanceToTarget)
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mheight-100">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Potrzebny dzienny postęp</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.DailyProgressNeeded)
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mheight-100">
+            <div class="card-header py-3">
+                <h5 class="card-subtitle">Potrzebny tygodniowy postep</h5>
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <div class="w-100">
+                    <h4 class="card-title text-center">
+                        @FormatWeight(Model.WeeklyProgressNeeded)
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+        <h2 class="text-center">Obecny tydzień</h2>
+        <canvas id="WeekGraph" style="max-width:100%;">
+        </canvas>
+    </div>
+    <div class="col">
+        <h2 class="text-center">Obecny miesiąc</h2>
+        <canvas id="MonthGraph" style="max-width:100%;">
+        </canvas>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="TargetModal" tabindex="-1" aria-labelledby="TargetModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Target</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-controller="Bodyweight" asp-action="EditTarget" method="post">
+
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <label>Weight</label>
+                        <input class="form-control" name="TargetWeight" type="number" min="1" max="300" value="@Model.Target.TargetWeight" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Date</label>
+                        <input class="form-control" name="TargetDate" type="date" value="@Model.Target.TargetDate.ToString("yyyy-MM-dd")" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
