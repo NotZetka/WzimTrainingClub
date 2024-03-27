@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\img\sggw.png" />
+	  <None Include="wwwroot\img\logo.svg" />
   </ItemGroup>
 
 </Project>
