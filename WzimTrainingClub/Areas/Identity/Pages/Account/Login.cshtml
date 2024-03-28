@@ -2,14 +2,14 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Zaloguj się";
 }
 
 <div class="row">
     <div class="col-md-4 m-auto">
         <section>
             <form id="account" method="post">
-                <h4>Log in to continue.</h4>
+                <h4>Zaloguj się, aby kontynuować.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -31,21 +31,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <button type="submit" class="btn btn-primary">Zaloguj się</button>
                 </div>
                 <div class="form-group">
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się jako nowy użytkownik</a>
                     </p>
                 </div>
             </form>
         </section>
     </div>
 </div>
-<div class="alert warning">
-             <span class="closebtn">&times;</span>  
-             <strong>Warning!</strong> We are still working on github authentication locally and we are gettings errors all around. We are still working on it.
-            </div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
