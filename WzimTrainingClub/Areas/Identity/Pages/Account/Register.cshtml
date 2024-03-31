@@ -1,13 +1,13 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Rejestracja";
 }
 
 <div class="row">
     <div class="col-md-4 m-auto">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <h4>Załóż nowe konto</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -31,14 +31,14 @@
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Gender</label>
+                <label>Płeć</label>
                 <div>
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-primary">
-                            <input asp-for="Input.Gender" type="radio" value="Male" /> Male
+                            <input asp-for="Input.Gender" type="radio" value="Mężczyzna" /> Male
                         </label>
                         <label class="btn btn-primary">
-                            <input asp-for="Input.Gender" type="radio" value="Female" /> Female
+                            <input asp-for="Input.Gender" type="radio" value="Kobieta" /> Female
                         </label>
                     </div>
                 </div>
@@ -54,14 +54,11 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <br />
+            <button type="submit" class="btn btn-primary">Zarejestruj się</button>
         </form>
     </div>
 </div>
-<div class="alert warning">
-             <span class="closebtn">&times;</span>  
-             <strong>Warning!</strong> We are still working on github authentication locally and we are gettings errors all around. We are still working on it.
-            </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
