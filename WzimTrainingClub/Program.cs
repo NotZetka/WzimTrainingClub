@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WzimFitnessApp.Data;
+using WzimTrainingClub.Data;
 using WzimTrainingClub.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
+builder.Services.AddTransient<IBodyweightStorageService, BodyweightEFStorageService>();
 
 
 var app = builder.Build();

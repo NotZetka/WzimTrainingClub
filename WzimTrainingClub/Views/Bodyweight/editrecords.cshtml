@@ -1,0 +1,74 @@
+﻿@model BodyweightRecord[]
+
+@{
+    ViewData["Title"] = "Edytuj wagę";
+}
+
+@section Scripts{
+    <script src="~/js/Bodyweight/editrecords.js"></script>
+
+}
+
+
+<div class="card">
+    <form asp-controller="Bodyweight" asp-action="EditRecords" method="post" onsubmit="return formPreSubmit();">
+
+        <div class="card-header">
+            <h4>Edytuj wagę</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-5">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <div>Waga</div>
+                            <input id="NewWeightInput" class="form-control" type="number" min="0" max="300" step="0.1" placeholder="kg" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <div>Data</div>
+                            <input id="NewDateInput" class="form-control" type="date" onchange="validateDates();" value="@DateTime.Today.ToString("yyyy-MM-dd")"/>
+                        </div>
+                    </div>
+                    <button type="button" id="AddNewRowButton" class="btn btn-primary float-right mt-1" onclick="addRowButton_Clicked();">Dodaj rekord</button>
+                </div>
+
+                <div class="col-7 overflow-auto" style="height:20rem">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Waga</th>
+                                <th>Data</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (BodyweightRecord record in Model)
+                            {
+                                <tr>
+                                    <td><input type="number" min="0" max="300" step="0.1" class="form-control" value="@record.Weight.ToString("F2")" required /></td>
+                                    <td><input type="date" class="form-control" value="@record.Date.ToString("yyyy-MM-dd")" required /></td>
+                                    <td><a href="#" class="font-weight-bold" onclick="removeRow(this);">X Usuń</a></td>
+                                </tr>
+                            }
+                            <tr class="d-none" id="NewRowTemplate">
+                                <td><input type="number" min="0" max="300" step="0.1" class="form-control" required /></td>
+                                <td><input type="date" class="form-control" required /></td>
+                                <td><a href="#" class="font-weight-bold" onclick="removeRow(this);">X Usuń</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="text-right">
+                <input type="submit" class="btn btn-primary" value="Zapisz" onclick="formSubmit_Clicked();" />
+                <a asp-action="Summary" class="btn btn-danger">Cofnij</a>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
