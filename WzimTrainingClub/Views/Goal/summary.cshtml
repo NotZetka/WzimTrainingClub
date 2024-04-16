@@ -1,0 +1,55 @@
+﻿@model Goal[]
+
+@{
+    ViewData["Title"] = "Cele";
+}
+
+<div>
+    <h2 class="d-inline">Moje Cele</h2>
+    <a asp-controller="Goal" asp-action="AddGoal" class="font-weight-bold ml-1" style="vertical-align:text-bottom">+Dodaj Cel</a>
+</div>
+
+<div class="row">
+    @foreach (Goal goal in Model)
+    {
+        <div class="col-3 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@goal.Activity</h4>
+                </div>
+                <div class="card-body text-center" style="font-size:1.1rem">
+                    @switch (goal)
+                    {
+                        case WeightliftingGoal wg:
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h3>@(wg.Weight)kg</h3>
+                                    <small>Ciężar</small>
+                                </div>
+                                <div class="col-6">
+                                    <h3>@(wg.Reps)</h3>
+                                    <small>Powtórzenia</small>
+                                </div>
+                            </div>
+                            break;
+                        case TimedGoal tg:
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h3>@tg.Quantity</h3>
+                                    <small>@tg.QuantityUnit</small>
+                                </div>
+                                <div class="col-6">
+                                    <h3>@tg.Time.ToString("hh\\:mm\\:ss")</h3>
+                                    <small>Czas</small>
+                                </div>
+                            </div>
+                            break;
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-action="ViewGoal" asp-route-id="@goal.ID" class="btn btn-primary float-right">Zobacz</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
