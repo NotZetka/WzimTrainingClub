@@ -16,6 +16,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
 
 
 builder.Services.AddTransient<IBodyweightStorageService, BodyweightEFStorageService>();
+builder.Services.AddTransient<IGoalStorageService, GoalEFStorageService>();
 
 
 var app = builder.Build();
