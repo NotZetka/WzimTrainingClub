@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-3">
             <div class="alert alert-info mt-3 mb-2">
-                <h5 class="ml-3">Add Today's Weight</h5>
+                <h5 class="ml-3">Dodaj dzisiejszą wagę</h5>
 
                 <form asp-action="AddTodayWeight" method="post" class="ml-3 mr-3">
                     <div class="input-group form-inline ">
@@ -57,7 +57,9 @@
                     </h4>
                     <div class="card-text text-center">
                         @if (Model.MostRecentRecord != null)
+                        {
                             @(Model.MostRecentRecord.Date.ToString("d"))
+                        }
                     </div>
                 </div>
             </div>
@@ -80,7 +82,7 @@
         </div>
         <div class="card">
             <div class="card-header py-3">
-                <h5 class="card-subtitle">Dzienna srednia (w tym tygodniu)</h5>
+                <h5 class="card-subtitle">Dzienna średnia (w tym tygodniu)</h5>
             </div>
             <div class="card-body d-flex align-items-center">
                 <div class="w-100">
@@ -168,7 +170,7 @@
     <div class="col">
         <div class="card mheight-100">
             <div class="card-header py-3">
-                <h5 class="card-subtitle">Odleglośc od docelowej wagi</h5>
+                <h5 class="card-subtitle">Odleglość od docelowej wagi</h5>
             </div>
             <div class="card-body d-flex align-items-center">
                 <div class="w-100">
@@ -228,7 +230,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Target</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edytuj cel</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -239,18 +241,18 @@
 
 
                     <div class="form-group">
-                        <label>Weight</label>
+                        <label>Waga</label>
                         <input class="form-control" name="TargetWeight" type="number" min="1" max="300" value="@Model.Target.TargetWeight" required/>
                     </div>
 
                     <div class="form-group">
-                        <label>Target Date</label>
+                        <label>Docelowa data</label>
                         <input class="form-control" name="TargetDate" type="date" value="@Model.Target.TargetDate.ToString("yyyy-MM-dd")" />
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
                     <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </form>

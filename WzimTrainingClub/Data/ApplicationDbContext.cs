@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WzimTrainingClub.Models;
 
-namespace WzimFitnessApp.Data
+namespace WzimTrainingClub.Data
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {

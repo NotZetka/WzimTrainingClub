@@ -1,6 +1,5 @@
 ﻿using WzimTrainingClub.Models;
 using Microsoft.EntityFrameworkCore;
-using WzimFitnessApp.Data;
 
 namespace WzimTrainingClub.Data
 {

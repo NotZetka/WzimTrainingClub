@@ -1,14 +1,7 @@
-﻿
-using FitnessTracker.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WzimFitnessApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using WzimTrainingClub.Models;
 
-namespace FitnessTracker.Data
+namespace WzimTrainingClub.Data
 {
     public class GoalEFStorageService : IGoalStorageService
     {
@@ -19,7 +12,7 @@ namespace FitnessTracker.Data
             this.dbContext = DBContext;
         }
 
-        public async Task DeleteGoalByID(FitnessUser User, long GoalID)
+        public async Task DeleteGoalByID(AppUser User, long GoalID)
         {
             Goal existingGoal = await dbContext.Goals.FirstOrDefaultAsync(goal => goal.ID == GoalID && goal.User == User);
             if (existingGoal == null)
@@ -30,19 +23,19 @@ namespace FitnessTracker.Data
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<Goal[]> GetAllGoals(FitnessUser User)
+        public async Task<Goal[]> GetAllGoals(AppUser User)
         {
             Goal[] result = await dbContext.Goals.Where(goal => goal.User == User).ToArrayAsync();
             return result;
         }
 
-        public async Task<Goal> GetGoalByID(FitnessUser User, long GoalID)
+        public async Task<Goal> GetGoalByID(AppUser User, long GoalID)
         {
             Goal result = await dbContext.Goals.FirstOrDefaultAsync(goal => goal.ID == GoalID && goal.User == User);
             return result;
         }
 
-        public async Task<GoalProgress[]> GetGoalProgress(FitnessUser User, long GoalID, bool AscendingOrder = false)
+        public async Task<GoalProgress[]> GetGoalProgress(AppUser User, long GoalID, bool AscendingOrder = false)
         {
             var query = dbContext.GoalProgressRecords
                 .Where(record => record.Goal.ID == GoalID && record.User == User);
