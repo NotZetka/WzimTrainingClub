@@ -1,0 +1,87 @@
+﻿@model Goal
+
+@{
+    ViewData["Title"] = "Edytuj Cel";
+
+    var id = Model == null ? 0 : Model.ID;
+    var activity = Model == null ? "" : Model.Activity;
+    var isWeightliftingGoal = (Model == null || Model.GetType() == typeof(WeightliftingGoal));
+    var isTimedGoal = Model?.GetType() == typeof(TimedGoal);
+
+    WeightliftingGoal weightliftingGoal = null;
+    TimedGoal timedGoal = null;
+
+    if (Model.GetType() == typeof(WeightliftingGoal))
+        weightliftingGoal = (WeightliftingGoal)Model;
+    else if (Model.GetType() == typeof(TimedGoal))
+        timedGoal = (TimedGoal)Model;
+
+    var weight = weightliftingGoal?.Weight ?? 0;
+    var reps = weightliftingGoal?.Reps ?? 0;
+
+    var quantity = timedGoal?.Quantity ?? 0;
+    var quantityUnit = timedGoal == null ? "" : timedGoal.QuantityUnit;
+    var timespan = timedGoal?.Time ?? new TimeSpan();
+}
+
+<h1 class="ml-1">Edytuj Cel</h1>
+
+<div class="container w-25 ml-2">
+    <form asp-controller="Goal" asp-action="EditGoal" method="post">
+        <input type="hidden" Name="GoalInput.ID" value="@id" required />
+
+        <div class="form-group">
+            <label class="font-weight-bold">Aktywność</label>
+            <input type="text" Name="GoalInput.Activity" class="form-control" value="@activity" required />
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold">Typ</label>
+            <div class="form-group form-inline">
+                <input type="radio" id="WeightliftingRadio" Name="GoalInput.Type" value="Weightlifting" class="form-control form-check mr-1" oninput="typeRadio_Changed();"
+                @(isWeightliftingGoal ? "checked" : "") />
+                <label>Siłowy</label>
+
+                <input type="radio" id="TimedRadio" Name="GoalInput.Type" value="Timed" class="form-control form-check mr-1 ml-3" oninput="typeRadio_Changed();"
+                @(isTimedGoal ? "checked" : "") />
+                <label>Czasowy</label>
+            </div>
+        </div>
+
+        <div id="WeightliftingGroup" class="form-group">
+            <div class="form-group">
+                <label class="font-weight-bold">Ciężar</label>
+                <input type="number" Name="GoalInput.Weight" min="0" step="0.1" class="form-control" value="@weight" required />
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Powtórzenia</label>
+                <input type="number" Name="GoalInput.Reps" min="0" step="1" class="form-control" value="@reps" required />
+            </div>
+        </div>
+
+        <div id="TimedGroup" class="form-group d-none">
+            <div class="form-group">
+                <label class="font-weight-bold">Czas</label>
+
+                <div class="d-flex">
+                    <input type="number" min="0" max="24" step="1" Name="GoalInput.Hours" class="form-control flex-grow-1" placeholder="Godziny" value="@timespan.Hours" required />
+                    <input type="number" min="0" max="60" step="1" Name="GoalInput.Minutes" class="form-control flex-grow-1" placeholder="Minuty" value="@timespan.Minutes" required />
+                    <input type="number" min="0" max="60" step="1" Name="GoalInput.Seconds" class="form-control flex-grow-1" placeholder="Sekundy" value="@timespan.Seconds" required />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Ilość</label>
+                <div class="d-flex">
+                    <input type="number" min="0" step="1" Name="GoalInput.Quantity" placeholder="Ilość" class="form-control flex-grow-1" value="@quantity" required />
+                    <input type="text" Name="GoalInput.QuantityUnit" placeholder="Jednostka" class="form-control flex-grow-1" value="@quantityUnit" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group float-right">
+            <a asp-controller="Goal" asp-action="Summary" class="btn btn-danger">Anuluj</a>
+            <input type="submit" class="btn btn-primary" value="Zapisz" />
+        </div>
+    </form>
+</div>
