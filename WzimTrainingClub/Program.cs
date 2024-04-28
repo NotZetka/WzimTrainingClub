@@ -18,6 +18,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
 builder.Services.AddTransient<IBodyweightStorageService, BodyweightEFStorageService>();
 builder.Services.AddTransient<IGoalStorageService, GoalEFStorageService>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+});
+
 
 var app = builder.Build();
 
