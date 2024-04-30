@@ -7,14 +7,6 @@
 
 @{
     ViewData["Title"] = "Waga";
-
-    string FormatWeight(double D)
-    {
-        if (D == -0)
-            D = 0;
-
-        var x = $"{Math.Round(D, 2).ToString("+0.00;-0.00")}kg";
-        return x;
     }
 
 
@@ -260,3 +252,14 @@
         </div>
     </div>
 </div>
+
+
+@functions {
+    private string FormatWeight(double D)
+    {
+        if (D == -0 || double.IsNaN(D))
+            D = 0;
+
+        return $"{Math.Round(D, 2).ToString("+0.00;-0.00")}kg";
+    }
+}
