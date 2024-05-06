@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WzimTrainingClub.Data;
-using WzimTrainingClub.Data;
 using WzimTrainingClub.Models;
 
 var builder = WebApplication.CreateBuilder(args);
