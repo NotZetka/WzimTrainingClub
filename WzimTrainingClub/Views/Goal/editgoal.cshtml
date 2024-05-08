@@ -26,16 +26,16 @@
 
 <h1 class="ml-1">Edytuj Cel</h1>
 
-<div class="container w-25 ml-2">
+<div class="container w-50 ml-2">
     <form asp-controller="Goal" asp-action="EditGoal" method="post">
         <input type="hidden" Name="GoalInput.ID" value="@id" required />
 
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label class="font-weight-bold">Aktywność</label>
             <input type="text" Name="GoalInput.Activity" class="form-control" value="@activity" required />
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label class="font-weight-bold">Typ</label>
             <div class="form-group form-inline">
                 <input type="radio" id="WeightliftingRadio" Name="GoalInput.Type" value="Weightlifting" class="form-control form-check mr-1" oninput="typeRadio_Changed();"
@@ -48,19 +48,19 @@
             </div>
         </div>
 
-        <div id="WeightliftingGroup" class="form-group">
-            <div class="form-group">
+        <div id="WeightliftingGroup" class="form-group mb-3">
+            <div class="form-group mb-3">
                 <label class="font-weight-bold">Ciężar</label>
                 <input type="number" Name="GoalInput.Weight" min="0" step="0.1" class="form-control" value="@weight" required />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label class="font-weight-bold">Powtórzenia</label>
                 <input type="number" Name="GoalInput.Reps" min="0" step="1" class="form-control" value="@reps" required />
             </div>
         </div>
 
         <div id="TimedGroup" class="form-group d-none">
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label class="font-weight-bold">Czas</label>
 
                 <div class="d-flex">
@@ -70,7 +70,7 @@
                 </div>
 
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label class="font-weight-bold">Ilość</label>
                 <div class="d-flex">
                     <input type="number" min="0" step="1" Name="GoalInput.Quantity" placeholder="Ilość" class="form-control flex-grow-1" value="@quantity" required />
@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        <div class="form-group float-right">
+        <div class="form-group mx-auto">
             <a asp-controller="Goal" asp-action="Summary" class="btn btn-danger">Anuluj</a>
             <input type="submit" class="btn btn-primary" value="Zapisz" />
         </div>
