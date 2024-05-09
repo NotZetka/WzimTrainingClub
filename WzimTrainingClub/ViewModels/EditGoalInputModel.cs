@@ -25,5 +25,5 @@ public class EditGoalInputModel
     [Range(0,double.MaxValue)]
     public float Quantity { get; set; }
     [MaxLength(30)]
-    public string QuantityUnit { get; set; }
+    public string? QuantityUnit { get; set; }
 }

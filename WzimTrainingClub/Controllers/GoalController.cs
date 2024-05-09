@@ -76,6 +76,8 @@ namespace WzimTrainingClub.Controllers
         [HttpPost]
         public async Task<IActionResult> EditGoal(EditGoalInputModel GoalInput)
         {
+            GoalInput.QuantityUnit ??= "";
+            
             if (TryValidateModel(GoalInput) == false)
                 return BadRequest();
 

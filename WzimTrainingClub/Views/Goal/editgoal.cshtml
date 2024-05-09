@@ -20,7 +20,7 @@
     var reps = weightliftingGoal?.Reps ?? 0;
 
     var quantity = timedGoal?.Quantity ?? 0;
-    var quantityUnit = timedGoal == null ? "" : timedGoal.QuantityUnit;
+    var quantityUnit = timedGoal?.QuantityUnit ?? "";
     var timespan = timedGoal?.Time ?? new TimeSpan();
 }
 
@@ -38,13 +38,16 @@
         <div class="form-group mb-3">
             <label class="font-weight-bold">Typ</label>
             <div class="form-group form-inline">
-                <input type="radio" id="WeightliftingRadio" Name="GoalInput.Type" value="Weightlifting" class="form-control form-check mr-1" oninput="typeRadio_Changed();"
-                @(isWeightliftingGoal ? "checked" : "") />
-                <label>Siłowy</label>
-
-                <input type="radio" id="TimedRadio" Name="GoalInput.Type" value="Timed" class="form-control form-check mr-1 ml-3" oninput="typeRadio_Changed();"
-                @(isTimedGoal ? "checked" : "") />
-                <label>Czasowy</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="WeightliftingRadio" Name="GoalInput.Type" value="Weightlifting" class="form-check-input" oninput="typeRadio_Changed();"
+                    @(isWeightliftingGoal ? "checked" : "") />
+                    <label class="form-check-label" for="WeightliftingRadio">Siłowy</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="TimedRadio" Name="GoalInput.Type" value="Timed" class="form-check-input" oninput="typeRadio_Changed();"
+                    @(isTimedGoal ? "checked" : "") />
+                    <label class="form-check-label" for="TimedRadio">Czasowy</label>
+                </div>
             </div>
         </div>
 
