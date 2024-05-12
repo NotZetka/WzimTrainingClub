@@ -38,7 +38,7 @@ namespace WzimTrainingClub.Controllers
         {
             WorkoutPlan newPlan = new WorkoutPlan()
             {
-                Name = "Workout Plan"
+                Name = "se"
             };
             return View("/Views/Workout/edit.cshtml", newPlan);
         }

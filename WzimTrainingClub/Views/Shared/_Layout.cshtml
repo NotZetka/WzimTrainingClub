@@ -12,7 +12,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <img class="logo" src="/img/logo.svg" alt="WzimTrainingClub Logo" height="35"></img>
+                <a href="/" class="navbar-brand">
+                    <img class="logo" src="/img/logo.svg" alt="WzimTrainingClub Logo" height="35"></img>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,7 +23,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Plany treningowe</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Workout" asp-action="Summary">Plany treningowe</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Bodyweight" asp-action="Summary">Waga</a>
