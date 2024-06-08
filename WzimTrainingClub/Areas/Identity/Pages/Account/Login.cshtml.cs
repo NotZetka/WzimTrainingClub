@@ -93,7 +93,7 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        ModelState.AddModelError(string.Empty, "Email lub hasło są błędne.");
                         return Page();
                     }
                 } catch(Exception ex)

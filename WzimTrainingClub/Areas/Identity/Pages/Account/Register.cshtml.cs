@@ -43,6 +43,7 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.", MinimumLength = 6)]
+            [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\W).+$", ErrorMessage = "Hasło musi zawierać co najmniej jedną małą i dużą literę, cyfrę oraz znak specjalny")]
             [DataType(DataType.Password)]
             [Display(Name = "Hasło")]
             public string Password { get; set; }
