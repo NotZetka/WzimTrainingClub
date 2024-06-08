@@ -1,18 +1,11 @@
-﻿using FitnessTracker.Data;
-using FitnessTracker.Models;
+﻿using WzimTrainingClub.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WzimFitnessApp.Data;
-using WzimTrainingClub.Models;
+using WzimTrainingClub.Data;
 
-namespace FitnessTracker.Controllers
+namespace WzimTrainingClub.Controllers
 {
     public class NewFoodModel
     {
@@ -22,16 +15,16 @@ namespace FitnessTracker.Controllers
     public class NutritionSummaryModel
     {
         public FoodRecord[] Records { get; set; }
-        public NutritionTarget Target { get; set; }
+        public DailyNutrition Target { get; set; }
     }
 
     [Authorize]
     public class NutritionController : Controller
     {
         private ApplicationDbContext dbContext;
-        private UserManager<FitnessUser> userManager;
+        private UserManager<AppUser> userManager;
 
-        public NutritionController(ApplicationDbContext DBContext, UserManager<FitnessUser> UserManager)
+        public NutritionController(ApplicationDbContext DBContext, UserManager<AppUser> UserManager)
         {
             dbContext = DBContext;
             userManager = UserManager;
@@ -44,7 +37,7 @@ namespace FitnessTracker.Controllers
                 Date = DateTime.Today;
             ViewData["selectedDate"] = Date;
 
-            FitnessUser currentUser = await userManager.GetUserAsync(HttpContext.User);
+            AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
 
             NewFoodModel model = new NewFoodModel()
             {
@@ -60,7 +53,7 @@ namespace FitnessTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewFood(Food Food)
         {
-            FitnessUser currentUser = await userManager.GetUserAsync(HttpContext.User);
+            AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
             Food.CreatedBy = currentUser;
 
             if (Food.ID == 0)
@@ -79,7 +72,7 @@ namespace FitnessTracker.Controllers
             if (FoodIDs.Length != Quantities.Length || FoodIDs.Length == 0)
                 return BadRequest();
 
-            FitnessUser currentUser = await userManager.GetUserAsync(HttpContext.User);
+            AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
 
             FoodRecord[] existingRecords = await dbContext.FoodRecords.Where(record => record.User == currentUser && record.ConsumptionDate == Date).ToArrayAsync();
             dbContext.FoodRecords.RemoveRange(existingRecords);
@@ -104,7 +97,7 @@ namespace FitnessTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteFood(long ID)
         {
-            FitnessUser currentUser = await userManager.GetUserAsync(HttpContext.User);
+            AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
 
             Food targetFood = await dbContext.UserFoods.FirstOrDefaultAsync(food => food.ID == ID);
             if (targetFood == null || targetFood.CreatedBy != currentUser)
@@ -119,15 +112,15 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> Summary()
         {
-            FitnessUser currentUser = await userManager.GetUserAsync(HttpContext.User);
+            AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
 
             FoodRecord[] userRecords = await dbContext.FoodRecords
                 .Where(record => record.User == currentUser && record.ConsumptionDate >= DateTime.Today.AddDays(-28))
                 .Include(record => record.Food)
                 .ToArrayAsync();
-            NutritionTarget userTarget = await dbContext.NutritionTargets.FirstOrDefaultAsync(record => record.User == currentUser);
+            DailyNutrition userTarget = await dbContext.DailyNutritions.FirstOrDefaultAsync(record => record.User == currentUser);
             if (userTarget == null)
-                userTarget = new NutritionTarget();
+                userTarget = new DailyNutrition();
 
             NutritionSummaryModel summaryModel = new NutritionSummaryModel()
             {
@@ -141,7 +134,7 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> GetNutritionData(uint PreviousDays = 7)
         {
-            FitnessUser currentUser = await userManager.GetUserAsync(HttpContext.User);
+            AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
             var records = await dbContext.FoodRecords
                 .Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-PreviousDays) && record.User == currentUser)
                 .Include(record => record.Food)

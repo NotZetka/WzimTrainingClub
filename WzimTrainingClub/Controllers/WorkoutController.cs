@@ -1,39 +1,33 @@
-﻿using FitnessTracker.Data;
-using FitnessTracker.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WzimFitnessApp.Data;
+using WzimTrainingClub.Data;
 using WzimTrainingClub.Models;
 
-namespace FitnessTracker.Controllers
+namespace WzimTrainingClub.Controllers
 {
     [Authorize]
     public class WorkoutController : Controller
     {
         private ApplicationDbContext dbContext;
-        private UserManager<FitnessUser> userManager;
+        private UserManager<AppUser> userManager;
 
-        public WorkoutController(ApplicationDbContext DBContext, UserManager<FitnessUser> UserManager)
+        public WorkoutController(ApplicationDbContext DBContext, UserManager<AppUser> UserManager)
         {
             dbContext = DBContext;
             userManager = UserManager;
         }
 
         [NonAction]
-        public async Task<FitnessUser> GetUser()
+        public async Task<AppUser> GetUser()
         {
             return await userManager.GetUserAsync(User);
         }
 
         public async Task<IActionResult> Summary()
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
             WorkoutPlan[] plans = await dbContext.WorkoutPlans.Where(plan => plan.User == currentUser).ToArrayAsync();
 
             return View(plans);
@@ -60,7 +54,7 @@ namespace FitnessTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(WorkoutPlan WorkoutPlan)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
             WorkoutPlan.User = currentUser;
 
             if (WorkoutPlan.ID == 0)
@@ -76,7 +70,7 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> Session(long PlanID, int SessionIndex)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
             WorkoutPlan plan = await dbContext.WorkoutPlans.FirstOrDefaultAsync(plan => plan.ID == PlanID && plan.User == currentUser);
             if (plan == null || SessionIndex < 0 || SessionIndex >= plan.Sessions.Length)
                 return BadRequest();

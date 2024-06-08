@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WzimFitnessApp.Data;
+using WzimTrainingClub.Data;
 using WzimTrainingClub.Data;
 using WzimTrainingClub.Models;
 

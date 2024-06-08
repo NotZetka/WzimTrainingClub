@@ -1,33 +1,26 @@
-﻿using FitnessTracker.Data;
-using FitnessTracker.Models;
-using FitnessTracker.ViewModels;
+﻿using WzimTrainingClub.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 using WzimTrainingClub.Models;
+using WzimTrainingClub.ViewModels;
 
-namespace FitnessTracker.Controllers
+namespace WzimTrainingClub.Controllers
 {
     [Authorize]
     public class GoalController : Controller
     {
         private IGoalStorageService storageService;
-        private UserManager<FitnessUser> userManager;
+        private UserManager<AppUser> userManager;
 
-        public GoalController(IGoalStorageService StorageService, UserManager<FitnessUser> UserManager)
+        public GoalController(IGoalStorageService StorageService, UserManager<AppUser> UserManager)
         {
             this.storageService = StorageService;
             userManager = UserManager;
         }
 
         [NonAction]
-        public async Task<FitnessUser> GetUser()
+        public async Task<AppUser> GetUser()
         {
             return await userManager.GetUserAsync(HttpContext.User);
         }
@@ -35,7 +28,7 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> Summary()
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             Goal[] goals = await storageService.GetAllGoals(currentUser);
 
@@ -56,7 +49,7 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> EditGoal(long ID)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             Goal goal = await storageService.GetGoalByID(currentUser, ID);
             if (goal == null)
@@ -68,7 +61,7 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteGoal(int ID)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             Goal goal = await storageService.GetGoalByID(currentUser, ID);
             if (goal == null)
@@ -86,7 +79,7 @@ namespace FitnessTracker.Controllers
             if (TryValidateModel(GoalInput) == false)
                 return BadRequest();
 
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             Goal goal = null;
             if (GoalInput.ID != 0)
@@ -128,7 +121,7 @@ namespace FitnessTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProgress(AddGoalProgressInputModel Progress)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             Goal goal = await storageService.GetGoalByID(currentUser, Progress.GoalID);
             if (goal == null)
@@ -139,14 +132,14 @@ namespace FitnessTracker.Controllers
             switch (Progress.Type.ToLower())
             {
                 case "weightlifting":
-                    newProgress = new WeightliftingProgress()
+                    newProgress = new WeightliftingGoalProgress()
                     {
                         Weight = Progress.Weight,
                         Reps = Progress.Reps
                     };
                     break;
                 case "timed":
-                    newProgress = new TimedProgress()
+                    newProgress = new TimedGoalProgress()
                     {
                         Time = new TimeSpan(Progress.Hours, Progress.Minutes, Progress.Seconds),
                         Quantity = Progress.Quantity
@@ -168,7 +161,7 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewGoal(long ID)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             Goal goal = await storageService.GetGoalByID(currentUser, ID);
             if (goal == null)
@@ -191,10 +184,10 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWeightliftingProgress(long GoalID)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             GoalProgress[] progress = await storageService.GetGoalProgress(currentUser, GoalID, true);
-            var result = Array.ConvertAll(progress, item => (WeightliftingProgress)item)
+            var result = Array.ConvertAll(progress, item => (WeightliftingGoalProgress)item)
                 .Select(record => new { Date = record.Date.ToString("d"), Weight = record.Weight, Reps = record.Reps })
                 .ToArray();
 
@@ -204,11 +197,11 @@ namespace FitnessTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTimedProgress(long GoalID)
         {
-            FitnessUser currentUser = await GetUser();
+            AppUser currentUser = await GetUser();
 
             GoalProgress[] progress = await storageService.GetGoalProgress(currentUser, GoalID, true);
 
-            var result = Array.ConvertAll(progress, item => (TimedProgress)item)
+            var result = Array.ConvertAll(progress, item => (TimedGoalProgress)item)
                 .Select(record => new { Date = record.Date.ToString("d"), Timespan = record.Time, Quantity = record.Quantity, QuantityUnit = record.QuantityUnit })
                 .ToArray();
 

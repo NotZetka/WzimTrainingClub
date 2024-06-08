@@ -1,19 +1,14 @@
-﻿using FitnessTracker.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WzimTrainingClub.Models;
+﻿using WzimTrainingClub.Models;
 
-namespace FitnessTracker.Data
+namespace WzimTrainingClub.Data
 {
     public interface IGoalStorageService
     {
-        public Task<Goal[]> GetAllGoals(FitnessUser User);
-        public Task<Goal> GetGoalByID(FitnessUser User, long GoalID);
-        public Task DeleteGoalByID(FitnessUser User, long GoalID);
+        public Task<Goal[]> GetAllGoals(AppUser User);
+        public Task<Goal> GetGoalByID(AppUser User, long GoalID);
+        public Task DeleteGoalByID(AppUser User, long GoalID);
         public Task StoreGoal(Goal Goal);
         public Task StoreGoalProgress(GoalProgress Progress);
-        public Task<GoalProgress[]> GetGoalProgress(FitnessUser User, long GoalID, bool AscendingOrder = false);
+        public Task<GoalProgress[]> GetGoalProgress(AppUser User, long GoalID, bool AscendingOrder = false);
     }
 }
