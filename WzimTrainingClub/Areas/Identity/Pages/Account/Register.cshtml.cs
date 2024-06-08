@@ -42,30 +42,30 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Potwierdź hasło")]
+            [Compare("Password", ErrorMessage = "Hasła są różne.")]
             public string ConfirmPassword { get; set; }
 
-            [StringLength(20, MinimumLength = 1, ErrorMessage = "First Name must be between 1 and 20 characters long")]
-            [Display(Name = "First Name")]
+            [StringLength(20, MinimumLength = 1, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.")]
+            [Display(Name = "Imię")]
             public string FirstName { get; set; }
 
-            [StringLength(20, MinimumLength = 1, ErrorMessage = "Last Name must be between 1 and 20 characters long")]
-            [Display(Name = "Last Name")]
+            [StringLength(20, MinimumLength = 1, ErrorMessage = "{0} musi mieć od {2} do {1} znaków")]
+            [Display(Name = "Nazwisko")]
             public string LastName { get; set; }
 
             [DataType(DataType.Date)]
-            [Display(Name ="Date of Birth")]
+            [Display(Name ="Data urodzenia")]
             public DateTime DateOfBirth { get; set; }
 
             [StringLength(10)]
-            [Display(Name ="Gender")]
+            [Display(Name ="Płeć")]
             public string Gender { get; set; }
         }
 
