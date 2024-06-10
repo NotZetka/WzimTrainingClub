@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WzimTrainingClub.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WzimTrainingClub.Controllers
 {
     public class NewFoodModel
     {
-        public Food[] UserFoods { get; set; }
-        public FoodRecord[] FoodRecords { get; set; }
+        public List<Food> UserFoods { get; set; } = new List<Food>();
     }
     public class NutritionSummaryModel
     {
@@ -31,21 +31,18 @@ namespace WzimTrainingClub.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddFood(DateTime Date)
+        public async Task<IActionResult> AddFood(DateTime date)
         {
-            if (Date.Ticks == 0)
-                Date = DateTime.Today;
-            ViewData["selectedDate"] = Date;
+            if (date.Ticks == 0)
+                date = DateTime.Today;
+            ViewData["selectedDate"] = date;
 
             AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
 
             NewFoodModel model = new NewFoodModel()
             {
-                FoodRecords = await dbContext.FoodRecords.Where(record => record.User == currentUser && record.ConsumptionDate == Date).ToArrayAsync(),
-                UserFoods = await dbContext.UserFoods.Where(record => record.CreatedBy == currentUser).ToArrayAsync()
+                UserFoods = await dbContext.UserFoods.Where(record => record.CreatedBy == currentUser && record.ConsumptionDate == date).ToListAsync()
             };
-
-
 
             return View(model);
         }
@@ -63,7 +60,7 @@ namespace WzimTrainingClub.Controllers
 
             await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("AddFood");
+            return RedirectToAction("AddFood", Food.ConsumptionDate);
         }
 
         [HttpPost]
@@ -91,7 +88,7 @@ namespace WzimTrainingClub.Controllers
             dbContext.FoodRecords.AddRange(newRecords);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("AddFood");
+            return RedirectToAction("AddFood", Date);
         }
 
         [HttpPost]
@@ -106,7 +103,7 @@ namespace WzimTrainingClub.Controllers
             dbContext.UserFoods.Remove(targetFood);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("AddFood");
+            return RedirectToAction("AddFood", targetFood.ConsumptionDate);
         }
 
         [HttpGet]
@@ -114,9 +111,15 @@ namespace WzimTrainingClub.Controllers
         {
             AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
 
-            FoodRecord[] userRecords = await dbContext.FoodRecords
-                .Where(record => record.User == currentUser && record.ConsumptionDate >= DateTime.Today.AddDays(-28))
-                .Include(record => record.Food)
+            FoodRecord[] userRecords = await dbContext.UserFoods
+                .Where(record => record.CreatedBy == currentUser && record.ConsumptionDate >= DateTime.Today.AddDays(-28))
+                .Select(x=> new FoodRecord
+                {
+                    ConsumptionDate = x.ConsumptionDate,
+                    Food = x,
+                    User = x.CreatedBy,
+                    Quantity = x.ServingSize,
+                })
                 .ToArrayAsync();
             DailyNutrition userTarget = await dbContext.DailyNutritions.FirstOrDefaultAsync(record => record.User == currentUser);
             if (userTarget == null)

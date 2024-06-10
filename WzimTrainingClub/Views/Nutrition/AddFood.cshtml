@@ -2,15 +2,13 @@
 
 @{
     ViewData["Title"] = "Dodaj jedzenie";
-
-    var recordForCurrentDate = Model.FoodRecords.Where(record => record.ConsumptionDate == (DateTime)ViewData["selectedDate"]).ToArray();
 }
 
 @section Scripts {
     <script src="~/js/Nutrition/AddFood.js"></script>
 }
 
-<h2>Add Existing Food</h2>
+<h2>Posiłki z dnia @(((DateTime)ViewData["selectedDate"]).ToString("yyyy-MM-dd"))</h2>
 <div class="horizontalScrollBox" style="overflow-x:auto;overflow-y:hidden;white-space:nowrap;">
     @foreach (Food f in Model.UserFoods)
     {
@@ -63,7 +61,22 @@
 
                 </td>
                 <td>
-                    <label class="mb-0" id="newFoodUnit">Jednostka</label>
+                    <label class="mb-0 me-3" id="newFoodUnit">Jednostka</label>
+                </td>
+                <td>
+                    <label class="mb-0">Węglowodany</label>
+
+                </td>
+                <td>
+                    <label class="mb-0">Białko</label>
+
+                </td>
+                <td>
+                    <label class="mb-0">Tłuszcz</label>
+
+                </td>
+                <td>
+                    <label class="mb-0">Kalorie</label>
 
                 </td>
             </tr>
@@ -80,26 +93,6 @@
                         <option value="g">g</option>
                     </select>
                 </td>
-            </tr>
-            <tr>
-                <td class="pt-2">
-                    <label class="mb-0">Węglowodany</label>
-
-                </td>
-                <td class="pt-2">
-                    <label class="mb-0">Białko</label>
-
-                </td>
-                <td class="pt-2">
-                    <label class="mb-0">Tłuszcz</label>
-
-                </td>
-                <td class="pt-2">
-                    <label class="mb-0">Kalorie</label>
-
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <input type="number" name="Carbohydrates" class="form-control mr-4" id="newFoodCarbs" oninput="updateCalories();" min="0" value="0" required />
                 </td>
@@ -113,74 +106,8 @@
                     <input type="number" name="Calories" class="form-control  mr-4" id="newFoodCalories" min="0" value="0" required />
                 </td>
             </tr>
+            <input type="hidden" name="ConsumptionDate" value="@(((DateTime)ViewData["selectedDate"]).ToString("yyyy-MM-dd"))" />
         </tbody>
     </table>
 </form>
-<div style="display: none;">
-    <hr />
 
-    <form asp-controller="Nutrition" asp-action="AddFood" method="get" id="DateSelectionForm">
-        <div class="form-group form-inline mt-2">
-            <label>Data</label>
-            <input type="date" name="Date" class="form-control" value="@(((DateTime)ViewData["selectedDate"]).ToString("yyyy-MM-dd"))" onchange='$("#DateSelectionForm").submit();' />
-        </div>
-    </form>
-
-
-    <form asp-controller="Nutrition" asp-action="EditRecords" method="post" style="display:none;">
-
-        <div class="mb-2">
-            <h2 class="mt-3 mr-2 d-inline align-middle">Spis posiłków</h2>
-            <input type="submit" class="btn btn-primary d-inline" value="Zapisz" />
-        </div>
-
-        <input type="hidden" name="Date" value="@(((DateTime)ViewData["selectedDate"]).ToString("yyyy-MM-dd"))" />
-
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Jedzenie</th>
-                    <th>Ilość</th>
-                    <th>Węglowodany</th>
-                    <th>Białko</th>
-                    <th>Tłuszcz</th>
-                    <th>Kalorie</th>
-                    <th></th>
-                </tr>
-
-                <tr id="NewRowTemplate" class="d-none">
-                    <td>
-                        <input type="hidden" class="recordID" />
-                        <input type="text" class="recordName" disabled />
-                    </td>
-                    <td><input type="number" class="recordQuantity" min="0" step="0.1" value="1" /></td>
-                    <td><input type="number" class="recordCarbs" disabled /></td>
-                    <td><input type="number" class="recordProtein" disabled /></td>
-                    <td><input type="number" class="recordFat" disabled /></td>
-                    <td><input type="number" class="recordCalories" disabled /></td>
-                    <td><a href="#" onclick="removeRow(this)">Remove</a></td>
-                </tr>
-            </thead>
-            <tbody id="RecordBody">
-                @for (int i = 0; i < recordForCurrentDate.Length; i++)
-                {
-                    FoodRecord record = recordForCurrentDate[i];
-
-                    <tr>
-                        <td>
-                            <input type="hidden" class="recordID" value="@record.FoodID" name="FoodIDs[@i]" />
-                            <input type="text" class="recordName" value="@record.Food.Name" disabled />
-                        </td>
-                        <td><input type="number" class="recordQuantity" min="0" step="0.1" value="@record.Quantity" name="Quantities[@i]" required /></td>
-                        <td><input type="number" class="recordCarbs" value="@record.Food.Carbohydrates" disabled /></td>
-                        <td><input type="number" class="recordProtein" value="@record.Food.Protein" disabled /></td>
-                        <td><input type="number" class="recordFat" value="@record.Food.Fat" disabled /></td>
-                        <td><input type="number" class="recordCalories" value="@record.Food.Calories" disabled /></td>
-                        <td><a href="#" onclick="removeRow(this)">Remove</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </form>
-</div>

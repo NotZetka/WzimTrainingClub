@@ -15,17 +15,17 @@
     int yesterdayProtein = yesterdayRecords.Sum(record => record.Food.Protein);
     int yesterdayFat = yesterdayRecords.Sum(record => record.Food.Protein);
 
-    var weekRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-7)).GroupBy(record => record.ConsumptionDate);
-    int weekCaloriesAverage = weekRecordGroup.Count() == 0 ? 0 : (int)weekRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Calories));
-    int weekCarbsAverage = weekRecordGroup.Count() == 0 ? 0 : (int)weekRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Carbohydrates));
-    int weekProteinAverage = weekRecordGroup.Count() == 0 ? 0 : (int)weekRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Protein));
-    int weekFatAverage = weekRecordGroup.Count() == 0 ? 0 : (int)weekRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Fat));
+    var weekRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-7));
+    int weekCaloriesAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Calories)/7);
+    int weekCarbsAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Carbohydrates) / 7);
+    int weekProteinAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Protein) / 7);
+    int weekFatAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Fat) / 7);
 
-    var monthRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-28)).GroupBy(record => record.ConsumptionDate);
-    int monthCaloriesAverage = monthRecordGroup.Count() == 0 ? 0 : (int)monthRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Calories));
-    int monthCarbsAverage = monthRecordGroup.Count() == 0 ? 0 : (int)monthRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Carbohydrates));
-    int monthProteinAverage = monthRecordGroup.Count() == 0 ? 0 : (int)monthRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Protein));
-    int monthFatAverage = monthRecordGroup.Count() == 0 ? 0 : (int)monthRecordGroup.Average(grouping => grouping.Sum(record => record.Food.Fat));
+    var monthRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-28));
+    int monthCaloriesAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Calories) / 28);
+    int monthCarbsAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Carbohydrates) / 28);
+    int monthProteinAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Protein) / 28);
+    int monthFatAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Fat) / 28);
 }
 
 @section Scripts {
@@ -34,9 +34,14 @@
 }
 
 <div class="mb-3">
-    <h2 class="d-inline">Podsumowanie posiłków   </h2>
-    <a asp-controller="Nutrition" asp-action="AddFood" class="font-weight-bold mb-3 btn btn-primary">Dodaj jedzenie</a>
+    <h2 class="d-inline">Podsumowanie posiłków</h2>
+    <form asp-controller="Nutrition" asp-action="AddFood" method="get">
+        <label for="Date">Wybierz date:</label>
+        <input id="Date" class="form-control" type="date" name="date" onchange="validateDates();"/>
+        <button type="submit" class="font-weight-bold mb-3 btn btn-primary">Dodaj jedzenie</button>
+    </form>
 </div>
+
 
 <div id="MonthGraphData" class="d-none"></div>
 
@@ -125,7 +130,7 @@
     <div class="col h-100">
         <div class="card">
             <div class="card-header">
-                <h3>Ostatnie 7 dni
+                <h3>Średnia ostatnie 7 dni</h3>
             </div>
             <div class="card-body">
                 <div class="text-center mb-2">
@@ -152,7 +157,7 @@
     <div class="col h-100">
         <div class="card">
             <div class="card-header">
-                <h3>Ostatnie 28 dni
+                <h3>Srednia ostatnie 28 dni</h3>
             </div>
             <div class="card-body">
                 <div class="text-center mb-2">

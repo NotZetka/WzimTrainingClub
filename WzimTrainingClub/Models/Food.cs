@@ -39,5 +39,8 @@ namespace WzimTrainingClub.Models
 
         [Required]
         public PortionUnit PortionUnit { get; set; }
+
+        [Required]
+        public DateTime ConsumptionDate { get; set; }
     }
 }
