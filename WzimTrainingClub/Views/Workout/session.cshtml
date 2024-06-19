@@ -48,11 +48,11 @@
                 @foreach (WorkoutActivity activity in Model.Activities)
                 {
                 <tr>
-                    <td class="align-middle"><input type="checkbox" class="form-control" style="font-size:0.75rem;" /></td>
+                    <td class="align-middle"></td>
                     <td class="align-middle">@activity.Name</td>
                     <td class="align-middle">@activity.Quantity</td>
                     <td class="align-middle">@activity.Sets</td>
-                    <td class="align-middle">@(activity.RestPeriodSeconds) seconds</td>
+                    <td class="align-middle">@(activity.RestPeriodSeconds) sekund</td>
                     @if (activity.RestPeriodSeconds != 0)
                         {
                     <td>
