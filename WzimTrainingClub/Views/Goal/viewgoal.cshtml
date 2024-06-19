@@ -24,10 +24,8 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="d-inline">@Model.Goal.Activity</h4>
-                <button type="button" class="btn btn-danger dropdown-toggle float-right" data-toggle="dropdown">Opcje</button>
-                <div class="dropdown-menu">
-                    <a asp-action="EditGoal" asp-route-ID="@Model.Goal.ID" class="dropdown-item">Edytuj</a>
-                </div>
+                <a asp-action="EditGoal" asp-route-ID="@Model.Goal.ID" class="btn btn-warning">Edytuj</a>
+                <a asp-action="DeleteGoal" asp-route-ID="@Model.Goal.ID" class="btn btn-danger">Usuń</a>
             </div>
             <div class="card-body">
                 <div class="row">

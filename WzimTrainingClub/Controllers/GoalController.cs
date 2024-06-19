@@ -52,6 +52,7 @@ namespace WzimTrainingClub.Controllers
             AppUser currentUser = await GetUser();
 
             Goal goal = await storageService.GetGoalByID(currentUser, ID);
+
             if (goal == null)
                 return BadRequest();
 
@@ -77,9 +78,39 @@ namespace WzimTrainingClub.Controllers
         public async Task<IActionResult> EditGoal(EditGoalInputModel GoalInput)
         {
             GoalInput.QuantityUnit ??= "";
-            
+
             if (TryValidateModel(GoalInput) == false)
-                return BadRequest();
+            {
+                Goal tempGoal;
+                if (GoalInput.Type == "Weightlifting")
+                {
+                    tempGoal = new WeightliftingGoal()
+                    {
+                        ID = GoalInput.ID,
+                        Activity = GoalInput.Activity,
+                        Reps = GoalInput.Reps,
+                        Weight = GoalInput.Weight
+                    };
+                } else if (GoalInput.Type == "Timed")
+                {
+                    tempGoal = new TimedGoal()
+                    {
+                        ID = GoalInput.ID,
+                        Activity = GoalInput.Activity,
+                        Quantity = GoalInput.Quantity,
+                        QuantityUnit = GoalInput.QuantityUnit
+                    };
+                } else
+                {
+                    tempGoal = new Goal()
+                    {
+                        ID = GoalInput.ID,
+                        Activity = GoalInput.Activity
+                    };
+                }
+
+                return View(tempGoal);
+            }
 
             AppUser currentUser = await GetUser();
 

@@ -24,6 +24,10 @@
     var timespan = timedGoal?.Time ?? new TimeSpan();
 }
 
+@section Scripts {
+    <script src="~/js/Goal/editgoal.js"></script>
+}
+
 <h1 class="ml-1">Edytuj Cel</h1>
 
 <div class="container w-50 ml-2">
@@ -85,6 +89,10 @@
         <div class="form-group mx-auto">
             <a asp-controller="Goal" asp-action="Summary" class="btn btn-danger">Anuluj</a>
             <input type="submit" class="btn btn-primary" value="Zapisz" />
+        </div>
+
+        <div>
+        @Html.ValidationSummary()
         </div>
     </form>
 </div>
