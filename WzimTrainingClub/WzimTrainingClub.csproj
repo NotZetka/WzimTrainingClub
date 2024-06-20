@@ -21,4 +21,8 @@
 	  <None Include="wwwroot\img\logo.svg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+  </ItemGroup>
+
 </Project>
