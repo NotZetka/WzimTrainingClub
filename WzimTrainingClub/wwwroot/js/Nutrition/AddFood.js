@@ -50,11 +50,11 @@ function setNewFoodFields(editButton) {
 
 function newFoodIDChanged() {
     if ($("#existingFoodID").val() == 0) {
-        $("#NewFoodHeader").text("Add New Food")
+        $("#NewFoodHeader").text("Dodaj nowy posiłek")
         $("#NewFoodCancel").addClass("d-none");
     }
     else {
-        $("#NewFoodHeader").text("Edit Food");
+        $("#NewFoodHeader").text("Edytuj");
         $("#NewFoodCancel").removeClass("d-none");
     }
 }

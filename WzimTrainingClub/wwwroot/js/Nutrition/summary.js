@@ -19,7 +19,7 @@ function setupWeekGraph() {
             data: {
                 labels: $.makeArray(dates).reverse(),
                 datasets: [{
-                    label: "Calories",
+                    label: "Kalorie",
                     data: $.makeArray(calories).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0,0,255,1)',
@@ -35,7 +35,7 @@ function setupWeekGraph() {
             data: {
                 labels: $.makeArray(dates).reverse(),
                 datasets: [{
-                    label: "Carbs",
+                    label: "Węglowodany",
                     data: $.makeArray(carbs).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0, 199, 0, 1)',
@@ -43,7 +43,7 @@ function setupWeekGraph() {
                     lineTension: 0
                 },
                 {
-                    label: "Protein",
+                    label: "Białko",
                     data: $.makeArray(protein).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 220, 0, 1)',
@@ -51,7 +51,7 @@ function setupWeekGraph() {
                     lineTension: 0
                 },
                 {
-                    label: "Fat",
+                    label: "Tłuszcze",
                     data: $.makeArray(fat).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 0, 0, 1)',
@@ -80,7 +80,7 @@ function setupMonthGraph() {
             data: {
                 labels: $.makeArray(dates).reverse(),
                 datasets: [{
-                    label: "Calories",
+                    label: "Kalorie",
                     data: $.makeArray(calories).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0,0,255,1)',
@@ -96,7 +96,7 @@ function setupMonthGraph() {
             data: {
                 labels: $.makeArray(dates).reverse(),
                 datasets: [{
-                    label: "Carbs",
+                    label: "Węglowodany",
                     data: $.makeArray(carbs).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0, 199, 0, 1)',
@@ -104,7 +104,7 @@ function setupMonthGraph() {
                     lineTension: 0
                 },
                 {
-                    label: "Protein",
+                    label: "Białko",
                     data: $.makeArray(protein).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 220, 0, 1)',
@@ -112,7 +112,7 @@ function setupMonthGraph() {
                     lineTension: 0
                 },
                 {
-                    label: "Fat",
+                    label: "Tłuszcze",
                     data: $.makeArray(fat).reverse(),
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 0, 0, 1)',

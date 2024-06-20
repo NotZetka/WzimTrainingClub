@@ -33,7 +33,7 @@
                                     <input id="NewWeightInput" class="form-control" type="number" min="0" max="300" step="0.1" placeholder="kg" />
                                 </td>
                                 <td>
-                                    <input id="NewDateInput" class="form-control" type="date" onchange="validateDates();" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                                    <input id="NewDateInput" class="form-control" type="date" onchange="validateDates();" value="@DateTime.Today.ToString("dd.MM.yyyy")" />
                                 </td>
                             </tr>
                         </tbody>
@@ -55,7 +55,7 @@
                             {
                                 <tr>
                                     <td><input type="number" min="0" max="300" step="0.1" class="form-control" value="@record.Weight.ToString()" required /></td>
-                                    <td><input type="date" class="form-control" value="@record.Date.ToString("yyyy-MM-dd")" required /></td>
+                                    <td><input type="date" class="form-control" value="@record.Date.ToString("dd.MM.yyyy")" required /></td>
                                     <td><a href="#" class="font-weight-bold btn btn-danger" onclick="removeRow(this);">Usuń</a></td>
                                 </tr>
                             }

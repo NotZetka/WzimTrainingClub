@@ -27,13 +27,12 @@
         <a asp-controller="Workout" asp-action="Create" class="font-weight-bold ml-1" style="vertical-align:text-bottom">+ Nowy plan</a>
     </div>
 
-
     <div class="row">
 
         @foreach (WorkoutPlan plan in Model)
         {
 
-        <div class="col-3">
+        <div class="col-3 p-2">
             <div class="card">
                 <div class="card-header"><h4 class="my-0">@plan.Name</h4></div>
                 <div class="card-body">

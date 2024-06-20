@@ -148,11 +148,11 @@ namespace WzimTrainingClub.Controllers
             .Select(grouping =>
             new
             {
-                Date = grouping.Key.ToString("d"),
-                Calories = grouping.Sum(r => r.Food.Calories),
-                Carbs = grouping.Sum(r => r.Food.Carbohydrates),
-                Protein = grouping.Sum(r => r.Food.Protein),
-                Fat = grouping.Sum(r => r.Food.Fat)
+                Data = grouping.Key.ToString("d"),
+                Kcal = grouping.Sum(r => r.Food.Calories),
+                Węglowodany = grouping.Sum(r => r.Food.Carbohydrates),
+                Białko = grouping.Sum(r => r.Food.Protein),
+                Tłuszcz = grouping.Sum(r => r.Food.Fat)
             })
             .ToArray();
 

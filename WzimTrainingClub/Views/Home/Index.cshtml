@@ -1,7 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "";
+    ViewData["Title"] = "Strona główna";
 }
+<div class="text-center my-5">
+    <h3>Witaj, @User.Identity.Name,</h3>
+    <h4>dbasz z nami o zdrowie już od <span style="color: green;">X</span> dni, tak trzymaj!</h4>
+</div>
 
-<div class="text-center">
-    <img src="./img/sggw.png" alt="Nie znaleziono zdjęcia" />
+<div class="text-center opacity-50 my-8">
+    <img src="./img/sggw.png" alt="Nie znaleziono zdjęcia" class="img-fluid" />
 </div>

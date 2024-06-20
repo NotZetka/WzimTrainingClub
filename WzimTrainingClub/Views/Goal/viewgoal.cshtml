@@ -24,7 +24,7 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="d-inline">@Model.Goal.Activity</h4>
-                <a asp-action="EditGoal" asp-route-ID="@Model.Goal.ID" class="btn btn-warning">Edytuj</a>
+                <a asp-action="EditGoal" asp-route-ID="@Model.Goal.ID" class="btn btn-warning mx-2">Edytuj</a>
                 <a asp-action="DeleteGoal" asp-route-ID="@Model.Goal.ID" class="btn btn-danger">Usuń</a>
             </div>
             <div class="card-body">
@@ -63,7 +63,7 @@
                                 }
                             </div>
                             <div class="col border-right text-center">
-                                <h3 class="border-bottom pb-2">Najlepszy Wynik</h3>
+                                <h3 class="border-bottom pb-2">Najlepszy wynik</h3>
 
                                 @switch (Model.Goal)
                                 {
@@ -108,7 +108,7 @@
                             </div>
 
                             <div class="col border-right text-center">
-                                <h3 class="border-bottom pb-2">Najbardziej Ostatni</h3>
+                                <h3 class="border-bottom pb-2">Ostatni wynik</h3>
 
                                 @switch (Model.Goal)
                                 {
@@ -239,7 +239,7 @@
 
                     <div class="form-group">
                         <label>Data</label>
-                        <input type="date" name="Date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                        <input type="date" name="Date" class="form-control" value="@DateTime.Today.ToString("dd.MM.yyyy")" required />
                     </div>
 
                     @switch (Model.Goal)
