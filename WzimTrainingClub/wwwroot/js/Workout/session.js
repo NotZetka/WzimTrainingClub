@@ -69,7 +69,7 @@ function startRest_Clicked(sender) {
 
 function resetRestPeriod() {
     clearInterval(currentRestTimer);
-    $(currentRestElement).removeClass("btn-danger").addClass("btn-primary").text("Start Rest");
+    $(currentRestElement).removeClass("btn-danger").addClass("btn-primary").text("Rozpocznik odpoczynek");
     currentRestElement = null;
 }
 
