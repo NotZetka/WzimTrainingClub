@@ -82,7 +82,7 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = Input.Email, Email = Input.Email,FirstName = Input.FirstName,LastName = Input.LastName,DateOfBirth = Input.DateOfBirth,Gender = Input.Gender };
+                var user = new AppUser { UserName = Input.Email, Email = Input.Email,FirstName = Input.FirstName,LastName = Input.LastName,DateOfBirth = Input.DateOfBirth,Gender = Input.Gender, CreatedOn = DateTime.Now };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

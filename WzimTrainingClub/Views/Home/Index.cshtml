@@ -2,8 +2,20 @@
     ViewData["Title"] = "Strona główna";
 }
 <div class="text-center my-5">
-    <h3>Witaj, @User.Identity.Name,</h3>
-    <h4>dbasz z nami o zdrowie już od <span style="color: green;">X</span> dni, tak trzymaj!</h4>
+    @if(User.Identity.IsAuthenticated) {
+        <h3>Witaj, @User.Identity.Name</h3>
+        if(ViewBag.Days == 0)
+        {
+            <h4>To twój pierwszy dzień dbania o zdrowie razem z nami. Tak trzymaj!</h4>
+        } else
+        {
+            <h4>dbasz z nami o zdrowie już od <span style="color: green;">@ViewBag.Days</span> @(ViewBag.Days == 1 ? "dnia" : "dni"), tak trzymaj!</h4>
+        }
+    } else
+    {
+        <h3>Witaj!</h3>
+        <h4><a href="/Identity/Account/Register">Załóż konto</a> i zacznij z nami dbać o zdrowie już teraz!</h4>
+    }
 </div>
 
 <div class="text-center opacity-50 my-8">
