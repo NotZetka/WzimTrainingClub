@@ -54,6 +54,11 @@ namespace WzimTrainingClub.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(WorkoutPlan WorkoutPlan)
         {
+            if (WorkoutPlan.SessionsJSON == null)
+            {
+                WorkoutPlan.SessionsJSON = string.Empty;
+            }
+
             AppUser currentUser = await GetUser();
             WorkoutPlan.User = currentUser;
 
