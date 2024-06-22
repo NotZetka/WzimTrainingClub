@@ -5,7 +5,7 @@
 }
 
 function setupWeekGraph() {
-    $.get("/Nutrition/GetNutritionData", { PreviousDays: 7 }, function (data) {
+    $.get("/Nutrition/GetNutritionData", { PreviousDays: 2 }, function (data) {
         var dates = data.map(x => x.date);
         var calories = data.map(x => x.calories);
         var carbs = data.map(x => x.carbs);
@@ -17,10 +17,10 @@ function setupWeekGraph() {
         var weekCaloriesChart = new Chart(weekCaloriesContext, {
             type: "line",
             data: {
-                labels: $.makeArray(dates).reverse(),
+                labels: dates,
                 datasets: [{
                     label: "Kalorie",
-                    data: $.makeArray(calories).reverse(),
+                    data: calories,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0,0,255,1)',
                     borderWidth: 2,
@@ -33,10 +33,10 @@ function setupWeekGraph() {
         var weekMacroChart = new Chart(weekMacroContext, {
             type: "line",
             data: {
-                labels: $.makeArray(dates).reverse(),
+                labels: dates,
                 datasets: [{
                     label: "Węglowodany",
-                    data: $.makeArray(carbs).reverse(),
+                    data: carbs,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0, 199, 0, 1)',
                     borderWidth: 2,
@@ -44,7 +44,7 @@ function setupWeekGraph() {
                 },
                 {
                     label: "Białko",
-                    data: $.makeArray(protein).reverse(),
+                    data: protein,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 220, 0, 1)',
                     borderWidth: 2,
@@ -52,7 +52,7 @@ function setupWeekGraph() {
                 },
                 {
                     label: "Tłuszcze",
-                    data: $.makeArray(fat).reverse(),
+                    data: fat,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 0, 0, 1)',
                     borderWidth: 2,
@@ -78,10 +78,10 @@ function setupMonthGraph() {
         var MonthCaloriesChart = new Chart(MonthCaloriesContext, {
             type: "line",
             data: {
-                labels: $.makeArray(dates).reverse(),
+                labels: dates,
                 datasets: [{
                     label: "Kalorie",
-                    data: $.makeArray(calories).reverse(),
+                    data: calories,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0,0,255,1)',
                     borderWidth: 2,
@@ -94,10 +94,10 @@ function setupMonthGraph() {
         var MonthMacroChart = new Chart(MonthMacroContext, {
             type: "line",
             data: {
-                labels: $.makeArray(dates).reverse(),
+                labels: dates,
                 datasets: [{
                     label: "Węglowodany",
-                    data: $.makeArray(carbs).reverse(),
+                    data: carbs,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(0, 199, 0, 1)',
                     borderWidth: 2,
@@ -105,7 +105,7 @@ function setupMonthGraph() {
                 },
                 {
                     label: "Białko",
-                    data: $.makeArray(protein).reverse(),
+                    data: protein,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 220, 0, 1)',
                     borderWidth: 2,
@@ -113,7 +113,7 @@ function setupMonthGraph() {
                 },
                 {
                     label: "Tłuszcze",
-                    data: $.makeArray(fat).reverse(),
+                    data: fat,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: 'rgba(240, 0, 0, 1)',
                     borderWidth: 2,
