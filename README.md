@@ -78,32 +78,8 @@ Po uruchomieniu aplikacji, możesz uzyskać do niej dostęp, przechodząc do `ht
 - **Bootstrap**: Framework CSS do stylowania interfejsu użytkownika.
 - **jQuery**: Biblioteka JavaScript do obsługi dynamicznych działań na stronie.
 
-## Rozwój
-
-### Dodawanie nowych funkcji
-
-1. **Utwórz nową gałąź**:
-   ```sh
-   git checkout -b feature-nowa-funkcja
-   ```
-
-2. **Wprowadź swoje zmiany i zatwierdź**:
-   ```sh
-   git add .
-   git commit -m "Dodano nową funkcję"
-   ```
-
-3. **Wypchnij zmiany na gałąź**:
-   ```sh
-   git push origin feature-nowa-funkcja
-   ```
-
-4. **Utwórz pull request**: Prześlij pull request do przeglądu.
-
 ## Licencja
 
 Ten projekt jest licencjonowany na warunkach licencji MIT. Zobacz plik [LICENSE](LICENSE) po więcej szczegółów.
 
 ---
-
-Ten README dostarcza kompleksowego przewodnika do zrozumienia i konfiguracji projektu WzimTrainingClub. Postępuj zgodnie z instrukcjami, aby zapewnić płynne doświadczenie rozwojowe.
