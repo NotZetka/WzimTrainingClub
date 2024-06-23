@@ -3,7 +3,7 @@
 
 ## Przegląd
 
-WzimTrainingClub to aplikacja webowa zaprojektowana w celu ułatwienia zarządzania treningami i trzymaniem diety. Aplikacja zapewnia funkcje związane z zarządzaniem użytkownikami, harmonogramowaniem wydarzeń oraz utrzymywaniem rekordów treningowych. Projekt został zbudowany przy użyciu ASP.NET Core i obejmuje kilka obszarów funkcjonalności, w tym zarządzanie tożsamością, harmonogramowanie wydarzeń i komunikację z użytkownikami.
+WzimTrainingClub to aplikacja webowa zaprojektowana w celu ułatwienia zarządzania treningami i trzymaniem diety. Aplikacja zapewnia funkcje związane z zarządzaniem użytkownikami, harmonogramowaniem wydarzeń oraz utrzymywaniem rekordów treningowych. Projekt został zbudowany przy użyciu ASP.NET Core i obejmuje kilka obszarów funkcjonalności, w tym zarządzanie tożsamością i harmonogramowanie wydarzeń.
 
 ## Struktura Katalogów
 
@@ -25,6 +25,7 @@ Upewnij się, że masz zainstalowane na swoim systemie:
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio](https://visualstudio.microsoft.com/) lub [Visual Studio Code](https://code.visualstudio.com/)
+- [SQL Server](https://www.microsoft.com/pl-pl/sql-server/sql-server-downloads)
 
 ### Instalacja
 
@@ -55,15 +56,19 @@ Zaktualizuj plik `appsettings.json` swoimi specyficznymi ustawieniami konfigurac
 
 ## Użytkowanie
 
-Po uruchomieniu aplikacji, możesz uzyskać do niej dostęp, przechodząc do `http://localhost:5000` w przeglądarce internetowej.
+Po uruchomieniu aplikacji, możesz uzyskać do niej dostęp, przechodząc do `http://localhost:7283` w przeglądarce internetowej.
 
-### Funkcje
+### Użytkowanie
 
-- **Rejestracja i logowanie użytkowników**: Użytkownicy mogą rejestrować się i logować do aplikacji.
-- **Zarządzanie hasłami**: Użytkownicy mogą resetować i zmieniać swoje hasła.
-- **Zarządzanie profilem**: Użytkownicy mogą aktualizować swoje informacje profilowe.
-- **Harmonogramowanie wydarzeń**: Użytkownicy mogą planować i przeglądać nadchodzące wydarzenia treningowe.
-- **System powiadomień**: Użytkownicy otrzymują powiadomienia o ważnych wydarzeniach i aktualizacjach.
+- **Rejestracja**: Przejdź do strony rejestracji i utwórz nowe konto.
+- **Logowanie**: Zaloguj się, używając danych podanych podczas rejestracji.
+- **Zmiana hasła**: Przejdź do ustawień profilu i zmień hasło.
+- **Edycja profilu**: Zaktualizuj swoje dane profilowe w ustawieniach.
+- **Śledzenie wagi**: Dodawaj swoje wagi w odpowiedniej sekcji i monitoruj postępy.
+- **Dodawanie posiłków**: Dodaj posiłki i monitoruj spożycie kalorii.
+- **Tworzenie planów treningowych**: Twórz plany treningowe i zarządzaj nimi.
+- **Tworzenie i śledzenie celów**: Definiuj cele i monitoruj swoje postępy.
+
 
 ## Technologie
 
@@ -95,26 +100,10 @@ Po uruchomieniu aplikacji, możesz uzyskać do niej dostęp, przechodząc do `ht
 
 4. **Utwórz pull request**: Prześlij pull request do przeglądu.
 
-### Uruchamianie testów
-
-Aby uruchomić testy, użyj następującego polecenia:
-
-```sh
-dotnet test
-```
-
-## Współtworzenie
-
-Współtworzenie jest mile widziane! Prosimy o zapoznanie się z plikiem [CONTRIBUTING.md](CONTRIBUTING.md) zawierającym wytyczne dotyczące współtworzenia projektu.
-
 ## Licencja
 
 Ten projekt jest licencjonowany na warunkach licencji MIT. Zobacz plik [LICENSE](LICENSE) po więcej szczegółów.
 
-## Kontakt
-
-W razie jakichkolwiek pytań lub problemów, prosimy o kontakt na adres [yourname@example.com](mailto:yourname@example.com).
-
 ---
 
-Ten README dostarcza kompleksowego przewodnika do zrozumienia, konfiguracji i współtworzenia projektu WzimTrainingClub. Postępuj zgodnie z instrukcjami, aby zapewnić płynne doświadczenie rozwojowe.
+Ten README dostarcza kompleksowego przewodnika do zrozumienia i konfiguracji projektu WzimTrainingClub. Postępuj zgodnie z instrukcjami, aby zapewnić płynne doświadczenie rozwojowe.
