@@ -105,5 +105,3 @@ Po uruchomieniu aplikacji, możesz uzyskać do niej dostęp, przechodząc do `ht
 Ten projekt jest licencjonowany na warunkach licencji MIT. Zobacz plik [LICENSE](LICENSE) po więcej szczegółów.
 
 ---
-
-Ten README dostarcza kompleksowego przewodnika do zrozumienia i konfiguracji projektu WzimTrainingClub. Postępuj zgodnie z instrukcjami, aby zapewnić płynne doświadczenie rozwojowe.
