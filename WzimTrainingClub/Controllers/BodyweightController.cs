@@ -88,7 +88,7 @@ namespace WzimTrainingClub.Controllers
             if (Dates.Length != Weights.Length)
                 return BadRequest();
 
-            for (int i = 0; i < Dates.Length; i++)
+            for (int i = 1; i < Dates.Length; i++)
             {
                 if (Weights[i] <= 0 || Weights[i] >= 200)
                     return BadRequest();
@@ -98,8 +98,8 @@ namespace WzimTrainingClub.Controllers
 
             await storageService.DeleteExistingRecords(currentUser);
 
-            BodyweightRecord[] records = new BodyweightRecord[Dates.Length];
-            for (int i = 0; i < Dates.Length; i++)
+            BodyweightRecord[] records = new BodyweightRecord[Dates.Length-1];
+            for (int i = 1; i < Dates.Length; i++)
             {
                 BodyweightRecord newRecord = new BodyweightRecord()
                 {
@@ -107,7 +107,7 @@ namespace WzimTrainingClub.Controllers
                     Date = Dates[i],
                     Weight = Weights[i]
                 };
-                records[i] = newRecord;
+                records[i-1] = newRecord;
             }
 
             await storageService.StoreBodyweightRecords(records);

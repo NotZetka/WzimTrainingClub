@@ -31,16 +31,16 @@ function addNewRow(weight, date) {
     rowClone.find("input").eq(0).val(weight);
     rowClone.find("input").eq(1).val(date);
 
-    $("table tbody").prepend(rowClone);
+    $(".old-dates").prepend(rowClone);
 }
 
 function validateNewDate() {
     var newDate = $("#NewDateInput").val();
     var result = true;
 
-    $("table tbody tr td input[type=date]").each(function (index, element) {
+    $(".old-date").each(function (index, element) {
         var value = $(element).val();
-        if ($(value == newDate) {
+        if ($(value) == newDate) {
             $("#NewDateInput").addClass("border-danger");
             result = false;
             return false;
@@ -54,7 +54,7 @@ function validateNewDate() {
 
 function validateAllDates() {
     var result = true;
-    var elements = $("table tbody tr td input[type=date]")
+    var elements = $(".old-date");
     elements.removeClass("border-danger");
     elements.each(function (outerIndex, outerElement) {
         elements.each(function (innerIndex, innerElement) {
@@ -81,6 +81,12 @@ function formSubmit_Clicked() {
         return;
     removeTemplateRow();
     updateInputNames();
+}
+
+function weightFormSubmit() {
+    $("#NewWeightInput").val("0");
+
+    $("#NewDateInput").val("1999-01-01");
 }
 
 function addRowButton_Clicked() {
