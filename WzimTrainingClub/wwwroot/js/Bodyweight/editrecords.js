@@ -1,4 +1,6 @@
-﻿function getDateString(DateObject) {
+﻿const { error } = require("jquery");
+
+function getDateString(DateObject) {
     var year = String(DateObject.getFullYear());
     var month = String(DateObject.getMonth() + 1);
     month = month.length === 1 ? "0".concat(month) : month;
@@ -37,7 +39,8 @@ function validateNewDate() {
     var result = true;
 
     $("table tbody tr td input[type=date]").each(function (index, element) {
-        if ($(element).val() == newDate) {
+        var value = $(element).val();
+        if ($(value == newDate) {
             $("#NewDateInput").addClass("border-danger");
             result = false;
             return false;
@@ -98,6 +101,7 @@ function addRowButton_Clicked() {
 
     var date = dateInput.val();
     if (date == "") {
+        console.log(date);
         dateInput.addClass("border-danger");
         return;
     }
