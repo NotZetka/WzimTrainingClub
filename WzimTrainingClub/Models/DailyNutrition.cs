@@ -6,19 +6,19 @@ namespace WzimTrainingClub.Models
     {
         public long ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public AppUser User { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public int DailyCalories { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public int DailyCarbohydrates { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public int DailyProtein { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public int DailyFat { get; set; }
 
     }

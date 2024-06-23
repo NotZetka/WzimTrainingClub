@@ -8,11 +8,11 @@ namespace WzimTrainingClub.Models
     {
         public long ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public AppUser User { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public string SessionsJSON { get; set; }
 
         [NotMapped]

@@ -4,13 +4,13 @@ namespace WzimTrainingClub.ViewModels;
 
 public class AddGoalProgressInputModel
 {
-    [Required]
+    [Required(ErrorMessage = "Uzupełnij to pole.")]
     [Range(0,long.MaxValue)]
     public long GoalID { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Uzupełnij to pole.")]
     [MaxLength(20)]
     public string Type { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Uzupełnij to pole.")]
     public DateTime Date { get; set; }
     [Range(0,500)]
     public float Weight { get; set; }
