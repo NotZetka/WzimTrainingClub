@@ -84,7 +84,7 @@
                                             </div>
                                         </div>
 
-                                        <h6>@(highestWeightRecord == null ? "" : highestWeightRecord.Date.ToString("d"))</h6>
+                                        <h6>@(highestWeightRecord == null ? "" : highestWeightRecord.Date.ToString("dd.MM.yyyy"))</h6>
                                         break;
 
                                     case TimedGoal tg:
@@ -102,7 +102,7 @@
                                                 <small>Czas</small>
                                             </div>
                                         </div>
-                                        <h6>@(lowestTimeRecord == null ? "" : lowestTimeRecord.Date.ToString("d"))</h6>
+                                        <h6>@(lowestTimeRecord == null ? "" : lowestTimeRecord.Date.ToString("dd.MM.yyyy"))</h6>
                                         break;
                                 }
                             </div>
@@ -127,7 +127,7 @@
                                                 <small>Powtórzenia</small>
                                             </div>
                                         </div>
-                                        <h6>@(mostRecentWeightRecord == null ? "" : mostRecentWeightRecord.Date.ToString("d"))</h6>
+                                        <h6>@(mostRecentWeightRecord == null ? "" : mostRecentWeightRecord.Date.ToString("dd.MM.yyyy"))</h6>
                                         break;
                                     case TimedGoal tg:
                                         var mostRecentTimeRecord = (TimedGoalProgress)Model.Progress
@@ -144,7 +144,7 @@
                                                 <small>Czas</small>
                                             </div>
                                         </div>
-                                        <h6>@(mostRecentTimeRecord == null ? "" : mostRecentTimeRecord.Date.ToString("d"))</h6>
+                                        <h6>@(mostRecentTimeRecord == null ? "" : mostRecentTimeRecord.Date.ToString("dd.MM.yyyy"))</h6>
                                         break;
                                 }
                             </div>
@@ -181,7 +181,7 @@
                                     @foreach (GoalProgress progress in Model.Progress)
                                     {
                                         <tr>
-                                            <td>@progress.Date.ToString("d")</td>
+                                                <td>@progress.Date.ToString("dd.MM.yyyy")</td>
 
                                             @switch (progress)
                                             {
