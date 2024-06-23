@@ -138,23 +138,42 @@ namespace WzimTrainingClub.Controllers
         public async Task<IActionResult> GetNutritionData(uint PreviousDays = 7)
         {
             AppUser currentUser = await userManager.GetUserAsync(HttpContext.User);
-            var records = await dbContext.FoodRecords
-                .Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-PreviousDays) && record.User == currentUser)
-                .Include(record => record.Food)
+
+            if(currentUser == null)
+            {
+                return BadRequest();
+            }
+
+            var records = await dbContext.UserFoods
+                .Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-PreviousDays) && record.CreatedByID == currentUser.Id)
+                //.Include(record => record.Food)
                 .ToArrayAsync();
 
             var result = records
-            .GroupBy(record => record.ConsumptionDate)
-            .Select(grouping =>
-            new
-            {
-                Date = grouping.Key.ToString("d"),
-                Calories = grouping.Sum(r => r.Food.Calories),
-                Carbs = grouping.Sum(r => r.Food.Carbohydrates),
-                Protein = grouping.Sum(r => r.Food.Protein),
-                Fat = grouping.Sum(r => r.Food.Fat)
-            })
-            .ToArray();
+                .GroupBy(record => record.ConsumptionDate)
+                .Select(grouping => new
+                {
+                    Date = grouping.Key.ToString("d"),
+                    Calories = grouping.Sum(r => r.Calories),
+                    Carbs = grouping.Sum(r => r.Carbohydrates),
+                    Protein = grouping.Sum(r => r.Protein),
+                    Fat = grouping.Sum(r => r.Fat)
+                })
+                .ToArray()
+                .Reverse();
+
+            //var result = records
+            //.GroupBy(record => record.ConsumptionDate)
+            //.Select(grouping =>
+            //new
+            //{
+            //    Data = grouping.Key.ToString("d"),
+            //    Kcal = grouping.Sum(r => r.Food.Calories),
+            //    Węglowodany = grouping.Sum(r => r.Food.Carbohydrates),
+            //    Białko = grouping.Sum(r => r.Food.Protein),
+            //    Tłuszcz = grouping.Sum(r => r.Food.Fat)
+            //})
+            //.ToArray();
 
             return Json(result);
         }

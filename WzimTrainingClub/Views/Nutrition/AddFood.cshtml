@@ -8,11 +8,11 @@
     <script src="~/js/Nutrition/AddFood.js"></script>
 }
 
-<h2>Posiłki z dnia @(((DateTime)ViewData["selectedDate"]).ToString("yyyy-MM-dd"))</h2>
-<div class="horizontalScrollBox" style="overflow-x:auto;overflow-y:hidden;white-space:nowrap;">
+<h2>Posiłki z dnia @(((DateTime)ViewData["selectedDate"]).ToString("dd.MM.yyyy"))</h2>
+<div class="row">
     @foreach (Food f in Model.UserFoods)
     {
-        <div class="col-3 d-inline-block float-none" style="margin-right:-0.5rem;margin-left:-0.5rem">
+        <div class="col-3 mt-3" style="">
             <div class="card" data-ID="@f.ID" data-Name="@f.Name" data-Carbs="@f.Carbohydrates" data-Protein="@f.Protein" data-Fat="@f.Fat" data-Calories="@f.Calories" data-ServingSize="@f.ServingSize" data-ServingUnit="@f.ServingSize">
                 <div class="card-header">
                     <h3 class="text-center mb-0">@f.Name</h3>
@@ -22,7 +22,7 @@
                         @(f.ServingSize)@(f.ServingSize.ToString())
                     </h6>
                     <h5 class="text-center font-weight-normal">
-                        @(f.Calories)kcal
+                        @(f.Calories)&nbsp;kcal
                     </h5>
 
                 </div>
@@ -43,7 +43,6 @@
 <form id="NewFoodForm" asp-controller="Nutrition" asp-action="AddNewFood" method="post" class="mt-4">
     <div class="mb-2">
         <h2 class="d-inline mr-2 align-middle" id="NewFoodHeader">Dodaj nowe jedzenie</h2>
-        <input type="submit" class="btn btn-primary" value="Zapisz" />
         <input type="reset" class="btn btn-danger d-none" value="Anuluj" id="NewFoodCancel" onclick="cancelEdit();" />
     </div>
 
@@ -89,8 +88,8 @@
                 </td>
                 <td>
                     <select name="ServingUnit" class="form-control" required>
-                        <option value="ml">ml</option>
                         <option value="g">g</option>
+                        <option value="ml">ml</option>
                     </select>
                 </td>
                 <td>
@@ -106,8 +105,9 @@
                     <input type="number" name="Calories" class="form-control  mr-4" id="newFoodCalories" min="0" value="0" required />
                 </td>
             </tr>
-            <input type="hidden" name="ConsumptionDate" value="@(((DateTime)ViewData["selectedDate"]).ToString("yyyy-MM-dd"))" />
+            <input type="hidden" name="ConsumptionDate" value="@(((DateTime)ViewData["selectedDate"]).ToString("dd.MM.yyyy"))" />
         </tbody>
     </table>
+    <input type="submit" class="btn btn-primary mt-3" value="Zapisz" />
 </form>
 

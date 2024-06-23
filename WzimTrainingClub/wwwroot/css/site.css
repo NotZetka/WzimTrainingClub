@@ -1,22 +1,135 @@
-html {
-  font-size: 14px;
+:root {
+    --primary: forestgreen;
+    padding-bottom: 80px;
+}
+
+.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+    user-select: none;
+}
+
+.body{
+}
+.navbar {
+    padding-left: 0 !important;
+}
+
+a {
+    color: forestgreen;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: forestgreen;
+    border-color: green;
+    border: none
+}
+
+.btn-primary:hover {
+    background-color: limegreen;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: forestgreen;
+    border-color: limegreen;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0.3rem 0 0.3rem 0px rgba(0, 0, 0, 0.05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    font-size: 1rem;
+    position: relative;
+    min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+#sidebar {
+    background-color: white;
+    box-shadow: 0.2rem 0 0.2rem 0px rgba(0, 0, 0, .05);
+    min-height: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+    #sidebar ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+        #sidebar ul li {
+        }
+
+            #sidebar ul li a {
+                display: block;
+                font-size: 20px;
+                color: white;
+                padding: 0.5rem 1rem 0.5rem 2rem;
+            }
+
+                #sidebar ul li a:hover {
+                    text-decoration: none;
+                    background-color: #0073c3;
+                    cursor: pointer;
+                    transition: background-color linear 0.2s;
+                }
+
+.mheight-100 {
+    min-height: 100%;
+}
+
+.card {
+    box-shadow: 0.2rem 0.1rem 0.3rem 0px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background-color: var(--primary) !important;
+    color: white !important;
+    font-weight: normal;
+}
+
+.card-footer {
+    margin-top: 10px;
+    background-color: #F2F2F2;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: black;
+    background-color: green;
+    border-color: green
 }
