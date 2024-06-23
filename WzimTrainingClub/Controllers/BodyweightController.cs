@@ -55,14 +55,12 @@ namespace WzimTrainingClub.Controllers
             AppUser currentUser = await GetUser();
 
 
-            TargetBodyweight newTarget = await storageService.GetTargetBodyweight(currentUser);
+            TargetBodyweight? newTarget = await storageService.GetTargetBodyweight(currentUser);
             if (newTarget == null)
             {
-                newTarget = new TargetBodyweight()
-                {
-                    User = currentUser
-                };
+                newTarget = new TargetBodyweight();
             }
+            newTarget.UserId = currentUser.Id;
             newTarget.TargetWeight = TargetWeight;
             newTarget.TargetDate = TargetDate;
             await storageService.StoreTargetBodyweight(newTarget);

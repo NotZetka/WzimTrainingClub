@@ -48,7 +48,7 @@ namespace WzimTrainingClub.Data
 
         public async Task<TargetBodyweight> GetTargetBodyweight(AppUser User)
         {
-            TargetBodyweight result = await dbContext.TargetBodyweights.FirstOrDefaultAsync(target => target.User == User);
+            TargetBodyweight? result = await dbContext.TargetBodyweights.FirstOrDefaultAsync(target => target.UserId == User.Id);
             if (result == null)
                 return new TargetBodyweight();
             return result;
