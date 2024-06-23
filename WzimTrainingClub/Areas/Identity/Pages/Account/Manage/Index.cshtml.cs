@@ -78,9 +78,23 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Profil został zaktualizowany";
-            return RedirectToPage();
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+            user.Gender = Input.Gender;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                await _signInManager.RefreshSignInAsync(user);
+
+                StatusMessage = "Profil został zaktualizowany";
+                return RedirectToPage();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

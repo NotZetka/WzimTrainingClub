@@ -17,17 +17,25 @@
             </div>
              <div class="form-group">
                 <label asp-for="FirstName">Imię:</label>
-                <input asp-for="FirstName" class="form-control" disabled />
+                <input asp-for="FirstName" class="form-control" enabled />
             </div>
             <div class="form-group">
                 <label asp-for="LastName">Nazwisko:</label>
-                <input asp-for="LastName" class="form-control" disabled />
+                <input asp-for="LastName" class="form-control" enabled />
             </div>
-            <div class="form-group">
-                <label asp-for="Gender">Płeć:</label>
-                <input asp-for="Gender" class="form-control" disabled />
+            <div class="form-group mb-3">
+                <label class="font-weight-bold">Płeć:</label>
+                <div class="btn-group">
+                    <label class="form-check-label">
+                        <input asp-for="Gender" type="radio" value="Mężczyzna" /> Mężczyzna
+                    </label>
+                    <label class="form-check-label">
+                        <input asp-for="Gender" type="radio" value="Kobieta" /> Kobieta
+                    </label>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
-            @*<button id="update-profile-button" type="submit" class="btn btn-primary mt-2">Zapisz</button>*@
+            <button id="update-profile-button" type="submit" class="btn btn-primary mt-2">Zapisz</button>
         </form>
         <a class="btn btn-primary mt-2" asp-page="./ChangePassword">Zmień hasło</a>
     </div>
