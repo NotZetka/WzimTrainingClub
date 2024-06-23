@@ -6,6 +6,9 @@
 
 @section Scripts{
     <script src="~/js/Workout/session.js"></script>
+    <script>
+        $("#PauseStopDiv").fadeOut(100);
+    </script>
 }
 
 <style>
@@ -26,10 +29,10 @@
         <div class="w-50 mx-auto mb-3">
             <h1 id="WorkoutTime" class="text-center" style="font-size:5rem;">00:00</h1>
             <button id="StartWorkoutButton" type="button" class="btn btn-primary d-block mx-auto" onclick="startWorkout_Clicked();">Start</button>
-            <div class="d-none mx-auto" id="PauseStopDiv">
-                <button id="PauseWorkoutButton" type="button" class="btn btn-primary d-inline mx-auto" onclick="pauseWorkout_Clicked()">Pauza</button>
-                <button id="StopWorkoutButton" type="button" class="btn btn-danger d-inline mx-auto" onclick="stopWorkout_Clicked();">Stop</button>
-            </div>
+            <div class="mx-auto" id="PauseStopDiv">
+            <button id="StopWorkoutButton" type="button" class="btn btn-danger d-inline mx-auto" onclick="stopWorkout_Clicked();">Stop</button>
+        </div>
+
         </div>
 
         <table class="table" style="width:80%;margin:auto;">
@@ -51,7 +54,24 @@
                     <td class="align-middle">@activity.Name</td>
                     <td class="align-middle">@activity.Quantity</td>
                     <td class="align-middle">@activity.Sets</td>
-                    <td class="align-middle">@(activity.RestPeriodSeconds) sekund</td>
+                        <td class="align-middle">
+                            @if (activity.RestPeriodSeconds / 60 == 1)
+                            {
+                                @("1 minuta ")
+                            }
+                            @if (activity.RestPeriodSeconds / 60 == 2)
+                            {
+                                @("2 minuty ")
+                            }
+                            @if (activity.RestPeriodSeconds % 60 == 2)
+                            {
+                                @(activity.RestPeriodSeconds % 60) @(" sekundy")
+                            }
+                            @if (activity.RestPeriodSeconds % 60 > 2)
+                            {
+                                @(activity.RestPeriodSeconds % 60) @(" sekund")
+                            }
+                    </td>
                     @if (activity.RestPeriodSeconds != 0)
                         {
                     <td>
