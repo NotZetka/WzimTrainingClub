@@ -22,10 +22,10 @@
     int weekFatAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Fat) / 7);
 
     var monthRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-28));
-    int monthCaloriesAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Calories) / 28);
-    int monthCarbsAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Carbohydrates) / 28);
-    int monthProteinAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Protein) / 28);
-    int monthFatAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Fat) / 28);
+    int monthCaloriesAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Calories) / 28);
+    int monthCarbsAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Carbohydrates) / 28);
+    int monthProteinAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Protein) / 28);
+    int monthFatAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Fat) / 28);
 }
 
 @section Scripts {
