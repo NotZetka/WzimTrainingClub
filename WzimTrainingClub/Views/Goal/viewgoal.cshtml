@@ -29,7 +29,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-7" style="padding-bottom:3rem;">
+                    <div class="" style="padding-bottom:3rem;">
                         <div class="row">
                             <div class="col border-right text-center">
                                 <h3 class="border-bottom pb-2">Cel</h3>
@@ -150,8 +150,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-5 d-flex flex-column pb-3">
-                        <div style="min-height:100%;height:1px;overflow-y:auto">
+                    <div class="row">
+                    <div class="">
+                        <h2 class="text-center">Postęp</h2>
+                        
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="d-flex flex-column">
+                        <div style="min-height:100%">
                             <table class="table flex-grow-1">
                                 <thead>
                                     <tr>
@@ -190,21 +197,15 @@
                                         </tr>
                                     }
                                 </tbody>
+
                             </table>
+                                <a class="font-weight-bold float-right p-1" href="#" data-toggle="modal" data-target="#AddProgressModal">+Dodaj Postęp</a>
                         </div>
-                        <div class="flex-grow-1 d-flex mt-1">
-                            <div class="flex-grow-1"></div>
-                            <a class="font-weight-bold float-right" href="#" data-toggle="modal" data-target="#AddProgressModal">+Dodaj Postęp</a>
                         </div>
                     </div>
                 </div>
 
                 <hr class="mt-4" />
-
-                <div class="w-50 m-auto">
-                    <h2 class="text-center">Postęp</h2>
-                    <canvas id="ProgressChart"></canvas>
-                </div>
             </div>
         </div>
     </div>
