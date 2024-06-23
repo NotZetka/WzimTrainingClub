@@ -5,7 +5,7 @@
 }
 
 function setupWeekGraph() {
-    $.get("/Nutrition/GetNutritionData", { PreviousDays: 2 }, function (data) {
+    $.get("/Nutrition/GetNutritionData", { PreviousDays: 7 }, function (data) {
         var dates = data.map(x => x.date);
         var calories = data.map(x => x.calories);
         var carbs = data.map(x => x.carbs);
