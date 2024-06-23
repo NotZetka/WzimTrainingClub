@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WzimTrainingClub.Areas.Identity.Pages.Account
 {
@@ -65,8 +67,8 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required(ErrorMessage = "Uzupełnij to pole.")]
-            [DataType(DataType.Date)]
-            [Display(Name ="Data urodzenia")]
+            [Display(Name = "Data urodzenia")]
+            [DataType(DataType.Date, ErrorMessage = "Podaj datę.")]
             public DateTime DateOfBirth { get; set; }
 
             [Required(ErrorMessage = "Uzupełnij to pole.")]

@@ -45,6 +45,7 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Nowe hasło")]
             public string NewPassword { get; set; }
 
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [DataType(DataType.Password)]
             [Display(Name = "Potwórz nowe hasło")]
             [Compare("NewPassword", ErrorMessage = "Hasła nie są takie same.")]

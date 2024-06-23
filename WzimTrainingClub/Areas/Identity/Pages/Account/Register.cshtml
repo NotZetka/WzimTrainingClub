@@ -26,7 +26,7 @@
             </div>
             <div class="form-group mb-3">
                 <label asp-for="Input.DateOfBirth" class="font-weight-bold">Data urodzenia:</label>
-                <input asp-for="Input.DateOfBirth" class="form-control" />
+                <input asp-for="Input.DateOfBirth" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")"/>
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">

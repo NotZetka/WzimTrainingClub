@@ -18,6 +18,7 @@ namespace WzimTrainingClub.Controllers
             if(user != null)
             {
                 ViewBag.Days = (DateTime.Now - user.CreatedOn).Days;
+                ViewBag.Name = user.FirstName;
             }
             return View();
         }
