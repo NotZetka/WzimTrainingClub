@@ -15,13 +15,13 @@
     int yesterdayProtein = yesterdayRecords.Sum(record => record.Food.Protein);
     int yesterdayFat = yesterdayRecords.Sum(record => record.Food.Protein);
 
-    var weekRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-7));
+    var weekRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-6));
     int weekCaloriesAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Calories)/7);
     int weekCarbsAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Carbohydrates) / 7);
     int weekProteinAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Protein) / 7);
     int weekFatAverage = weekRecordGroup.Count() == 0 ? 0 : (int)(weekRecordGroup.Sum(record => record.Food.Fat) / 7);
 
-    var monthRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-28));
+    var monthRecordGroup = Model.Records.Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-27));
     int monthCaloriesAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Calories) / 28);
     int monthCarbsAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Carbohydrates) / 28);
     int monthProteinAverage = monthRecordGroup.Count() == 0 ? 0 : (int)(monthRecordGroup.Sum(record => record.Food.Protein) / 28);
