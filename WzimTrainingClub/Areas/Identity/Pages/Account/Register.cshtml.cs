@@ -36,35 +36,40 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.", MinimumLength = 6)]
             [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\W).+$", ErrorMessage = "Hasło musi zawierać co najmniej jedną małą i dużą literę, cyfrę oraz znak specjalny")]
             [DataType(DataType.Password)]
             [Display(Name = "Hasło")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [DataType(DataType.Password)]
             [Display(Name = "Potwierdź hasło")]
             [Compare("Password", ErrorMessage = "Hasła są różne.")]
             public string ConfirmPassword { get; set; }
 
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [StringLength(20, MinimumLength = 1, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.")]
             [Display(Name = "Imię")]
             public string FirstName { get; set; }
 
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [StringLength(20, MinimumLength = 1, ErrorMessage = "{0} musi mieć od {2} do {1} znaków")]
             [Display(Name = "Nazwisko")]
             public string LastName { get; set; }
 
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [DataType(DataType.Date)]
             [Display(Name ="Data urodzenia")]
             public DateTime DateOfBirth { get; set; }
 
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [StringLength(10)]
             [Display(Name ="Płeć")]
             public string Gender { get; set; }

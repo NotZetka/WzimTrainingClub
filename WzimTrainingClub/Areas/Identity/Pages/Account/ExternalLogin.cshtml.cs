@@ -48,7 +48,7 @@ namespace WzimTrainingClub.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Uzupełnij to pole.")]
             [EmailAddress]
             public string Email { get; set; }
         }

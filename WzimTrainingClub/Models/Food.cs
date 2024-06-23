@@ -8,39 +8,39 @@ namespace WzimTrainingClub.Models
     {
         public long ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         [ForeignKey("CreatedBy")]
         public string CreatedByID { get; set; }
 
         public AppUser CreatedBy { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         [Range(0, int.MaxValue)]
         public int Calories { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         [Range(0, int.MaxValue)]
         public int Carbohydrates { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         [Range(0, int.MaxValue)]
         public int Protein { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         [Range(0, int.MaxValue)]
         public int Fat { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         [Range(0, int.MaxValue)]
         public int ServingSize { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public PortionUnit PortionUnit { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij to pole.")]
         public DateTime ConsumptionDate { get; set; }
     }
 }
