@@ -159,8 +159,8 @@ namespace WzimTrainingClub.Controllers
                     Protein = grouping.Sum(r => r.Protein),
                     Fat = grouping.Sum(r => r.Fat)
                 })
-                .ToArray()
-                .Reverse();
+                .OrderBy(r => r.Date)
+                .ToArray();
 
             //var result = records
             //.GroupBy(record => record.ConsumptionDate)
