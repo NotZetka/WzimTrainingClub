@@ -146,7 +146,7 @@ namespace WzimTrainingClub.Controllers
 
             var records = await dbContext.UserFoods
                 .Where(record => record.ConsumptionDate >= DateTime.Today.AddDays(-PreviousDays) && record.CreatedByID == currentUser.Id)
-                //.Include(record => record.Food)
+                .OrderBy(record => record.ConsumptionDate)
                 .ToArrayAsync();
 
             var result = records
@@ -159,7 +159,6 @@ namespace WzimTrainingClub.Controllers
                     Protein = grouping.Sum(r => r.Protein),
                     Fat = grouping.Sum(r => r.Fat)
                 })
-                .OrderBy(r => r.Date)
                 .ToArray();
 
             //var result = records
